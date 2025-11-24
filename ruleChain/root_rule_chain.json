@@ -9,7 +9,7 @@
     "additionalInfo": null
   },
   "metadata": {
-    "version": 9,
+    "version": 13,
     "firstNodeIndex": 8,
     "nodes": [
       {
@@ -371,6 +371,520 @@
           "layoutX": 1462,
           "layoutY": 570
         }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "Switch Sensor Type",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "function nextRelation(metadata, msg) {\n    return ['one','nine'];\n}\nif(msgType === 'POST_TELEMETRY_REQUEST') {\n    return ['two'];\n}\nreturn nextRelation(metadata, msg);",
+          "tbelScript": "function nextRelation(metadata, msg) {\n    return ['DHT20','LDR','HC-SR04','LM393','PIR','MQ-2','Relay', 'ESP32'];\n}\nif(typeof msg.temperature !== 'undefined' || typeof msg.humidity !== 'undefined') {\n    return ['DHT20'];\n}\nif(typeof msg.light !== 'undefined') {\n    return ['LDR'];\n}\nif(typeof msg.distance !== 'undefined') {\n    return ['HC-SR04'];\n}\nif(typeof msg.movement !== 'undefined') {\n    return ['PIR'];\n}\nif(typeof msg.soilhumidity !== 'undefined') {\n    return ['LM393'];\n}\nif(typeof msg.gas !== 'undefined') {\n    return ['MQ-2'];\n}\nif(typeof msg.relay !== 'undefined') {\n    return ['Relay'];\n}\nif(typeof msg.temp !== 'undefined') {\n    return ['ESP32']\n}\nreturn nextRelation(metadata, msg);"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 348,
+          "layoutY": 907
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 904,
+          "layoutY": 798
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Temperature Data",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.temperature === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 624,
+          "layoutY": 803
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Humidity Data",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.humidity === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 626,
+          "layoutY": 864
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 907,
+          "layoutY": 864
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "High Temperature",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "e9521430-c081-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1186,
+          "layoutY": 795
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Air Humidity High",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "2926b750-c082-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1183,
+          "layoutY": 858
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Gas Data",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.gas === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 628,
+          "layoutY": 941
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 906,
+          "layoutY": 936
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Inflamable",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "b5d91670-c082-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1185,
+          "layoutY": 931
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Movement Data",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.movement === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 629,
+          "layoutY": 1023
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 905,
+          "layoutY": 1017
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Human At Door",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "d7a76a40-c082-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1185,
+          "layoutY": 1015
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Light Data",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.light === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 627,
+          "layoutY": 1107
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 905,
+          "layoutY": 1101
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Light Alarm",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "6c8d9fa0-bfd7-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1186,
+          "layoutY": 1096
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Soil Humidity Data",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.soilhumidity === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 628,
+          "layoutY": 1190
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 902,
+          "layoutY": 1188
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Soil Humidity Low",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "36241af0-c083-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1185,
+          "layoutY": 1182
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Pool Water Data",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.poolwater === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 627,
+          "layoutY": 1263
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 902,
+          "layoutY": 1263
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Pool Water Low",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "0cacdef0-c083-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1187,
+          "layoutY": 1260
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Filter Valid Chip Temp Data",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "jsScript": "return msg.temperature > 20;",
+          "tbelScript": "return typeof msg.temp === \"number\" ? true : false;"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 626,
+          "layoutY": 1339
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 904,
+          "layoutY": 1339
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "ESP32 High Temp",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "5fcaab90-c95b-11f0-b5f4-25fce636d3ff"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1188,
+          "layoutY": 1339
+        }
       }
     ],
     "connections": [
@@ -411,11 +925,6 @@
       },
       {
         "fromIndex": 2,
-        "toIndex": 0,
-        "type": "Post telemetry"
-      },
-      {
-        "fromIndex": 2,
         "toIndex": 1,
         "type": "Post attributes"
       },
@@ -443,6 +952,11 @@
         "fromIndex": 2,
         "toIndex": 12,
         "type": "Disconnect Event"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 20,
+        "type": "Post telemetry"
       },
       {
         "fromIndex": 5,
@@ -482,6 +996,126 @@
       {
         "fromIndex": 12,
         "toIndex": 11,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 22,
+        "type": "DHT20"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 23,
+        "type": "DHT20"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 27,
+        "type": "MQ-2"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 30,
+        "type": "PIR"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 33,
+        "type": "LDR"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 36,
+        "type": "LM393"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 39,
+        "type": "LM393"
+      },
+      {
+        "fromIndex": 20,
+        "toIndex": 42,
+        "type": "ESP32"
+      },
+      {
+        "fromIndex": 21,
+        "toIndex": 25,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 22,
+        "toIndex": 21,
+        "type": "True"
+      },
+      {
+        "fromIndex": 23,
+        "toIndex": 24,
+        "type": "True"
+      },
+      {
+        "fromIndex": 24,
+        "toIndex": 26,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 27,
+        "toIndex": 28,
+        "type": "True"
+      },
+      {
+        "fromIndex": 28,
+        "toIndex": 29,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 30,
+        "toIndex": 31,
+        "type": "True"
+      },
+      {
+        "fromIndex": 31,
+        "toIndex": 32,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 33,
+        "toIndex": 34,
+        "type": "True"
+      },
+      {
+        "fromIndex": 34,
+        "toIndex": 35,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 36,
+        "toIndex": 37,
+        "type": "True"
+      },
+      {
+        "fromIndex": 37,
+        "toIndex": 38,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 39,
+        "toIndex": 40,
+        "type": "True"
+      },
+      {
+        "fromIndex": 40,
+        "toIndex": 41,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 42,
+        "toIndex": 43,
+        "type": "True"
+      },
+      {
+        "fromIndex": 43,
+        "toIndex": 44,
         "type": "Success"
       }
     ],

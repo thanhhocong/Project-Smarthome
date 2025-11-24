@@ -1,6 +1,6 @@
 {
   "ruleChain": {
-    "name": "Light Alarm",
+    "name": "ESP32 High Temp",
     "type": "CORE",
     "firstRuleNodeId": null,
     "root": false,
@@ -11,12 +11,12 @@
     }
   },
   "metadata": {
-    "version": 7,
+    "version": 2,
     "firstNodeIndex": 0,
     "nodes": [
       {
         "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
-        "name": "Check light outdoor",
+        "name": "High Chip Temp",
         "debugSettings": null,
         "singletonMode": false,
         "queueName": null,
@@ -24,45 +24,45 @@
         "configuration": {
           "scriptLang": "TBEL",
           "jsScript": "return msg.temperature > 20;",
-          "tbelScript": "return msg.light < 40;"
+          "tbelScript": "return msg.temp > 85;"
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 306,
-          "layoutY": 95
+          "layoutX": 340,
+          "layoutY": 151
         }
       },
       {
         "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
-        "name": "Low Light",
+        "name": "High Chip Temp",
         "debugSettings": null,
         "singletonMode": false,
         "queueName": null,
         "configurationVersion": 0,
         "configuration": {
+          "alarmType": "General Alarm",
           "scriptLang": "TBEL",
           "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
           "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
-          "useMessageAlarmData": false,
-          "overwriteAlarmDetails": false,
-          "alarmType": "Low Light Alarm",
-          "severity": "INDETERMINATE",
+          "severity": "CRITICAL",
           "propagate": false,
-          "relationTypes": [],
           "propagateToOwner": false,
           "propagateToOwnerHierarchy": false,
           "propagateToTenant": false,
-          "dynamicSeverity": false
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "dynamicSeverity": false,
+          "relationTypes": []
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 565,
-          "layoutY": 43
+          "layoutX": 653,
+          "layoutY": 85
         }
       },
       {
         "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
-        "name": "Daytime",
+        "name": "Normal Chip Temp",
         "debugSettings": null,
         "singletonMode": false,
         "queueName": null,
@@ -75,8 +75,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 565,
-          "layoutY": 168
+          "layoutX": 648,
+          "layoutY": 193
         }
       }
     ],

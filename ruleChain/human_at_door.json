@@ -11,7 +11,7 @@
     }
   },
   "metadata": {
-    "version": 4,
+    "version": 6,
     "firstNodeIndex": 0,
     "nodes": [
       {
@@ -24,7 +24,7 @@
         "configuration": {
           "scriptLang": "TBEL",
           "jsScript": "return msg.temperature > 20;",
-          "tbelScript": "return msg.human > 0;"
+          "tbelScript": "return msg.movement > 0;"
         },
         "additionalInfo": {
           "description": "",
@@ -45,7 +45,7 @@
           "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
           "useMessageAlarmData": false,
           "overwriteAlarmDetails": false,
-          "alarmType": "General Alarm",
+          "alarmType": "Door Alarm",
           "severity": "CRITICAL",
           "propagate": false,
           "relationTypes": [],

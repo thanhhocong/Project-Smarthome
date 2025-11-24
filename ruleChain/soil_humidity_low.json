@@ -11,7 +11,7 @@
     }
   },
   "metadata": {
-    "version": 4,
+    "version": 5,
     "firstNodeIndex": 0,
     "nodes": [
       {
@@ -45,7 +45,7 @@
           "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
           "useMessageAlarmData": false,
           "overwriteAlarmDetails": false,
-          "alarmType": "General Alarm",
+          "alarmType": "Low Soil Humid Alarm",
           "severity": "CRITICAL",
           "propagate": false,
           "relationTypes": [],

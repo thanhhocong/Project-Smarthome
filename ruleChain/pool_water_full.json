@@ -1,6 +1,6 @@
 {
   "ruleChain": {
-    "name": "Pool Water Low",
+    "name": "Pool Water Full",
     "type": "CORE",
     "firstRuleNodeId": null,
     "root": false,
@@ -11,7 +11,7 @@
     }
   },
   "metadata": {
-    "version": 5,
+    "version": 7,
     "firstNodeIndex": 0,
     "nodes": [
       {
@@ -24,7 +24,7 @@
         "configuration": {
           "scriptLang": "TBEL",
           "jsScript": "return msg.temperature > 20;",
-          "tbelScript": "return msg.water < 70;"
+          "tbelScript": "return msg.water > 0;"
         },
         "additionalInfo": {
           "description": "",
@@ -34,7 +34,7 @@
       },
       {
         "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
-        "name": "Full",
+        "name": "Low Level",
         "debugSettings": null,
         "singletonMode": false,
         "queueName": null,
@@ -53,7 +53,7 @@
       },
       {
         "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
-        "name": "Pool Water Low",
+        "name": "Pool Water Full",
         "debugSettings": null,
         "singletonMode": false,
         "queueName": null,

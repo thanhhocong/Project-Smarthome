@@ -9,7 +9,7 @@
     "additionalInfo": null
   },
   "metadata": {
-    "version": 13,
+    "version": 14,
     "firstNodeIndex": 8,
     "nodes": [
       {
@@ -810,7 +810,7 @@
       },
       {
         "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Pool Water Low",
+        "name": "Pool Water Full",
         "debugSettings": {
           "failuresEnabled": false,
           "allEnabled": false,

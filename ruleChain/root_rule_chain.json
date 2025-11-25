@@ -9,27 +9,9 @@
     "additionalInfo": null
   },
   "metadata": {
-    "version": 14,
-    "firstNodeIndex": 8,
+    "version": 19,
+    "firstNodeIndex": 4,
     "nodes": [
-      {
-        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
-        "name": "Save Timeseries",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "defaultTTL": 0,
-          "processingSettings": {
-            "type": "ON_EVERY_MESSAGE"
-          }
-        },
-        "additionalInfo": {
-          "layoutX": 1010,
-          "layoutY": 385
-        }
-      },
       {
         "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
         "name": "Save Attributes",
@@ -99,57 +81,6 @@
         }
       },
       {
-        "type": "org.thingsboard.rule.engine.filter.TbOriginatorTypeFilterNode",
-        "name": "Is Entity Group",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 0,
-        "configuration": {
-          "originatorTypes": [
-            "ENTITY_GROUP"
-          ]
-        },
-        "additionalInfo": {
-          "layoutX": 255,
-          "layoutY": 301
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeFilterNode",
-        "name": "Post attributes or RPC request",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 0,
-        "configuration": {
-          "messageTypes": [
-            "POST_ATTRIBUTES_REQUEST",
-            "RPC_CALL_FROM_SERVER_TO_DEVICE"
-          ]
-        },
-        "additionalInfo": {
-          "layoutX": 319,
-          "layoutY": 109
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.transform.TbDuplicateMsgToGroupNode",
-        "name": "Duplicate To Group Entities",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "entityGroupId": null,
-          "entityGroupIsMessageOriginator": true
-        },
-        "additionalInfo": {
-          "layoutX": 606,
-          "layoutY": 42
-        }
-      },
-      {
         "type": "org.thingsboard.rule.engine.profile.TbDeviceProfileNode",
         "name": "Device Profile Node",
         "debugSettings": null,
@@ -164,23 +95,6 @@
           "description": "Process incoming messages from devices with the alarm rules defined in the device profile. Dispatch all incoming messages with \"Success\" relation type.",
           "layoutX": 137,
           "layoutY": 415
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Generate Report",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "ruleChainId": "87d7a830-1bb6-11ef-813f-790f7ab3fcac",
-          "forwardMsgToDefaultRuleChain": false
-        },
-        "additionalInfo": {
-          "description": "Forwards message to the \"Generate Report\" rule chain",
-          "layoutX": 1004,
-          "layoutY": 690
         }
       },
       {
@@ -254,143 +168,6 @@
         }
       },
       {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "High Temperature",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "e9521430-c081-11f0-b5f4-25fce636d3ff"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 1463,
-          "layoutY": 229
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Air Humidity High",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "2926b750-c082-11f0-b5f4-25fce636d3ff"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 1462,
-          "layoutY": 287
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Inflamable",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "b5d91670-c082-11f0-b5f4-25fce636d3ff"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 1460,
-          "layoutY": 343
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Human At Door",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "d7a76a40-c082-11f0-b5f4-25fce636d3ff"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 1461,
-          "layoutY": 400
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Light Alarm",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "6c8d9fa0-bfd7-11f0-b5f4-25fce636d3ff"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 1461,
-          "layoutY": 457
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Pool Water Low",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "0cacdef0-c083-11f0-b5f4-25fce636d3ff"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 1462,
-          "layoutY": 513
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "Soil Humidity Low",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 1,
-        "configuration": {
-          "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "36241af0-c083-11f0-b5f4-25fce636d3ff"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 1462,
-          "layoutY": 570
-        }
-      },
-      {
-        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
-        "name": "Switch Sensor Type",
-        "debugSettings": null,
-        "singletonMode": false,
-        "queueName": null,
-        "configurationVersion": 0,
-        "configuration": {
-          "scriptLang": "TBEL",
-          "jsScript": "function nextRelation(metadata, msg) {\n    return ['one','nine'];\n}\nif(msgType === 'POST_TELEMETRY_REQUEST') {\n    return ['two'];\n}\nreturn nextRelation(metadata, msg);",
-          "tbelScript": "function nextRelation(metadata, msg) {\n    return ['DHT20','LDR','HC-SR04','LM393','PIR','MQ-2','Relay', 'ESP32'];\n}\nif(typeof msg.temperature !== 'undefined' || typeof msg.humidity !== 'undefined') {\n    return ['DHT20'];\n}\nif(typeof msg.light !== 'undefined') {\n    return ['LDR'];\n}\nif(typeof msg.distance !== 'undefined') {\n    return ['HC-SR04'];\n}\nif(typeof msg.movement !== 'undefined') {\n    return ['PIR'];\n}\nif(typeof msg.soilhumidity !== 'undefined') {\n    return ['LM393'];\n}\nif(typeof msg.gas !== 'undefined') {\n    return ['MQ-2'];\n}\nif(typeof msg.relay !== 'undefined') {\n    return ['Relay'];\n}\nif(typeof msg.temp !== 'undefined') {\n    return ['ESP32']\n}\nreturn nextRelation(metadata, msg);"
-        },
-        "additionalInfo": {
-          "description": "",
-          "layoutX": 348,
-          "layoutY": 907
-        }
-      },
-      {
         "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
         "name": "Save Timeseries",
         "debugSettings": {
@@ -408,8 +185,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 904,
-          "layoutY": 798
+          "layoutX": 1281,
+          "layoutY": 767
         }
       },
       {
@@ -426,8 +203,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 624,
-          "layoutY": 803
+          "layoutX": 1001,
+          "layoutY": 772
         }
       },
       {
@@ -444,8 +221,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 626,
-          "layoutY": 864
+          "layoutX": 1003,
+          "layoutY": 833
         }
       },
       {
@@ -466,8 +243,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 907,
-          "layoutY": 864
+          "layoutX": 1284,
+          "layoutY": 833
         }
       },
       {
@@ -487,8 +264,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1186,
-          "layoutY": 795
+          "layoutX": 1563,
+          "layoutY": 764
         }
       },
       {
@@ -508,8 +285,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1183,
-          "layoutY": 858
+          "layoutX": 1560,
+          "layoutY": 827
         }
       },
       {
@@ -526,8 +303,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 628,
-          "layoutY": 941
+          "layoutX": 1005,
+          "layoutY": 910
         }
       },
       {
@@ -548,8 +325,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 906,
-          "layoutY": 936
+          "layoutX": 1283,
+          "layoutY": 905
         }
       },
       {
@@ -569,8 +346,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1185,
-          "layoutY": 931
+          "layoutX": 1562,
+          "layoutY": 900
         }
       },
       {
@@ -591,8 +368,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 629,
-          "layoutY": 1023
+          "layoutX": 1006,
+          "layoutY": 992
         }
       },
       {
@@ -613,8 +390,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 905,
-          "layoutY": 1017
+          "layoutX": 1282,
+          "layoutY": 986
         }
       },
       {
@@ -634,8 +411,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1185,
-          "layoutY": 1015
+          "layoutX": 1562,
+          "layoutY": 984
         }
       },
       {
@@ -656,8 +433,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 627,
-          "layoutY": 1107
+          "layoutX": 1004,
+          "layoutY": 1076
         }
       },
       {
@@ -678,8 +455,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 905,
-          "layoutY": 1101
+          "layoutX": 1282,
+          "layoutY": 1070
         }
       },
       {
@@ -699,8 +476,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1186,
-          "layoutY": 1096
+          "layoutX": 1563,
+          "layoutY": 1065
         }
       },
       {
@@ -721,8 +498,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 628,
-          "layoutY": 1190
+          "layoutX": 1005,
+          "layoutY": 1159
         }
       },
       {
@@ -743,8 +520,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 902,
-          "layoutY": 1188
+          "layoutX": 1279,
+          "layoutY": 1157
         }
       },
       {
@@ -764,8 +541,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1185,
-          "layoutY": 1182
+          "layoutX": 1562,
+          "layoutY": 1151
         }
       },
       {
@@ -782,8 +559,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 627,
-          "layoutY": 1263
+          "layoutX": 1004,
+          "layoutY": 1232
         }
       },
       {
@@ -804,8 +581,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 902,
-          "layoutY": 1263
+          "layoutX": 1279,
+          "layoutY": 1232
         }
       },
       {
@@ -825,8 +602,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1187,
-          "layoutY": 1260
+          "layoutX": 1564,
+          "layoutY": 1229
         }
       },
       {
@@ -843,8 +620,8 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 626,
-          "layoutY": 1339
+          "layoutX": 1003,
+          "layoutY": 1308
         }
       },
       {
@@ -865,8 +642,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 904,
-          "layoutY": 1339
+          "layoutX": 1281,
+          "layoutY": 1308
         }
       },
       {
@@ -882,171 +659,190 @@
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 1188,
-          "layoutY": 1339
+          "layoutX": 1565,
+          "layoutY": 1308
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 0
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "additionalInfo": {
+          "layoutX": 1005,
+          "layoutY": 392
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Generate Report",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "forwardMsgToDefaultRuleChain": false,
+          "ruleChainId": "49b07ed0-8319-11f0-a934-bb34844744f7"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 999,
+          "layoutY": 657
         }
       }
     ],
     "connections": [
       {
-        "fromIndex": 0,
-        "toIndex": 13,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 0,
-        "toIndex": 14,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 0,
-        "toIndex": 15,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 0,
-        "toIndex": 16,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 0,
-        "toIndex": 17,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 0,
-        "toIndex": 18,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 0,
-        "toIndex": 19,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 2,
-        "toIndex": 1,
+        "fromIndex": 1,
+        "toIndex": 0,
         "type": "Post attributes"
       },
       {
-        "fromIndex": 2,
-        "toIndex": 3,
+        "fromIndex": 1,
+        "toIndex": 2,
         "type": "Other"
       },
       {
-        "fromIndex": 2,
-        "toIndex": 4,
+        "fromIndex": 1,
+        "toIndex": 3,
         "type": "RPC Request to Device"
       },
       {
-        "fromIndex": 2,
-        "toIndex": 9,
-        "type": "Generate Report"
-      },
-      {
-        "fromIndex": 2,
-        "toIndex": 10,
+        "fromIndex": 1,
+        "toIndex": 5,
         "type": "Connect Event"
       },
       {
-        "fromIndex": 2,
-        "toIndex": 12,
+        "fromIndex": 1,
+        "toIndex": 7,
         "type": "Disconnect Event"
       },
       {
-        "fromIndex": 2,
+        "fromIndex": 1,
+        "toIndex": 9,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 10,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 14,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 17,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
         "toIndex": 20,
         "type": "Post telemetry"
       },
       {
-        "fromIndex": 5,
-        "toIndex": 2,
-        "type": "False"
+        "fromIndex": 1,
+        "toIndex": 23,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 26,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 29,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 32,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 33,
+        "type": "Generate Report"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 1,
+        "type": "Success"
       },
       {
         "fromIndex": 5,
         "toIndex": 6,
-        "type": "True"
-      },
-      {
-        "fromIndex": 6,
-        "toIndex": 2,
-        "type": "False"
-      },
-      {
-        "fromIndex": 6,
-        "toIndex": 7,
-        "type": "True"
+        "type": "Success"
       },
       {
         "fromIndex": 7,
-        "toIndex": 2,
+        "toIndex": 6,
         "type": "Success"
       },
       {
         "fromIndex": 8,
-        "toIndex": 5,
+        "toIndex": 12,
         "type": "Success"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 8,
+        "type": "True"
       },
       {
         "fromIndex": 10,
         "toIndex": 11,
+        "type": "True"
+      },
+      {
+        "fromIndex": 11,
+        "toIndex": 13,
         "type": "Success"
       },
       {
-        "fromIndex": 12,
-        "toIndex": 11,
+        "fromIndex": 14,
+        "toIndex": 15,
+        "type": "True"
+      },
+      {
+        "fromIndex": 15,
+        "toIndex": 16,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 17,
+        "toIndex": 18,
+        "type": "True"
+      },
+      {
+        "fromIndex": 18,
+        "toIndex": 19,
         "type": "Success"
       },
       {
         "fromIndex": 20,
-        "toIndex": 22,
-        "type": "DHT20"
-      },
-      {
-        "fromIndex": 20,
-        "toIndex": 23,
-        "type": "DHT20"
-      },
-      {
-        "fromIndex": 20,
-        "toIndex": 27,
-        "type": "MQ-2"
-      },
-      {
-        "fromIndex": 20,
-        "toIndex": 30,
-        "type": "PIR"
-      },
-      {
-        "fromIndex": 20,
-        "toIndex": 33,
-        "type": "LDR"
-      },
-      {
-        "fromIndex": 20,
-        "toIndex": 36,
-        "type": "LM393"
-      },
-      {
-        "fromIndex": 20,
-        "toIndex": 39,
-        "type": "LM393"
-      },
-      {
-        "fromIndex": 20,
-        "toIndex": 42,
-        "type": "ESP32"
+        "toIndex": 21,
+        "type": "True"
       },
       {
         "fromIndex": 21,
-        "toIndex": 25,
+        "toIndex": 22,
         "type": "Success"
-      },
-      {
-        "fromIndex": 22,
-        "toIndex": 21,
-        "type": "True"
       },
       {
         "fromIndex": 23,
@@ -1055,67 +851,27 @@
       },
       {
         "fromIndex": 24,
-        "toIndex": 26,
+        "toIndex": 25,
         "type": "Success"
+      },
+      {
+        "fromIndex": 26,
+        "toIndex": 27,
+        "type": "True"
       },
       {
         "fromIndex": 27,
         "toIndex": 28,
-        "type": "True"
+        "type": "Success"
       },
       {
-        "fromIndex": 28,
-        "toIndex": 29,
-        "type": "Success"
+        "fromIndex": 29,
+        "toIndex": 30,
+        "type": "True"
       },
       {
         "fromIndex": 30,
         "toIndex": 31,
-        "type": "True"
-      },
-      {
-        "fromIndex": 31,
-        "toIndex": 32,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 33,
-        "toIndex": 34,
-        "type": "True"
-      },
-      {
-        "fromIndex": 34,
-        "toIndex": 35,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 36,
-        "toIndex": 37,
-        "type": "True"
-      },
-      {
-        "fromIndex": 37,
-        "toIndex": 38,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 39,
-        "toIndex": 40,
-        "type": "True"
-      },
-      {
-        "fromIndex": 40,
-        "toIndex": 41,
-        "type": "Success"
-      },
-      {
-        "fromIndex": 42,
-        "toIndex": 43,
-        "type": "True"
-      },
-      {
-        "fromIndex": 43,
-        "toIndex": 44,
         "type": "Success"
       }
     ],
